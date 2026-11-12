@@ -1,15 +1,31 @@
-# MONDIS Web — Template RAW AI/AO 2026
+# TIFA — Tracking Investment, Finance & Activities
 
-Website statis: `index.html`, `styles.css`, `app.js`. Buka `index.html` pada browser atau unggah ketiganya ke root repository GitHub Pages. Tidak perlu Render atau Python.
+Aplikasi monitoring AI & AO PLN UP3 Jayapura dengan identitas visual khas Papua (tifa).
 
-## Kesesuaian workbook
+## Isi paket
+- `index.html`: halaman web utama
+- `styles.css`: desain responsif warna biru, kuning, putih
+- `app.js`: dashboard, AI/AO 2025–2026, PRK, Monev, impor Excel, backup JSON
+- `assets/tifa-logo.svg`: logo vektor TIFA
 
-Impor Excel membaca sheet **AI 2026 (template)**, **AO 2026**, **AI 2025**, dan **Copy of FINAL AO 2025**. Field utama mencakup nomor PRK, sumber anggaran, kontrak, pekerjaan, ULP, perusahaan, nilai SKKO/kontrak, tanggal, amandemen, risalah rapat, BA, tagihan, pembayaran, progres, status, kendala dan komitmen mitra. Tersedia ringkasan PRK, filter, dan backup JSON. Sheet pagu rekap tidak diimpor sebagai baris kontrak agar tidak menggandakan nilai.
+## Menjalankan
+Ekstrak ZIP, lalu buka `index.html` pada browser. Untuk GitHub Pages, unggah seluruh file termasuk folder `assets` ke root repository dan aktifkan Settings → Pages → Deploy from a branch.
 
-**Impor membutuhkan koneksi internet** untuk memuat pustaka SheetJS dari CDN. Data dalam workbook **tidak disertakan** pada paket website. Impor dilakukan secara lokal di browser, bukan dikirim ke server.
+Impor Excel menggunakan pustaka SheetJS dari CDN dan memerlukan internet. Pemetaan kolom impor mengikuti prototipe MONDIS sebelumnya; verifikasi hasil terhadap workbook sebelum digunakan.
 
-## Batasan
+## Penting
+Penyimpanan menggunakan `localStorage` browser. Tidak ada backend, autentikasi, sinkronisasi multiuser, maupun audit trail. Jangan gunakan data operasional sensitif pada situs publik. Untuk produksi, perlu backend aman, autentikasi, database persisten dan backup terkelola.
 
-Ini prototype, data disimpan pada `localStorage` perangkat/browser yang dipakai. Tidak ada sinkronisasi antarpegawai, autentikasi, audit trail atau database server. Jangan publikasikan data kontrak internal ke GitHub Pages atau perangkat bersama. Gunakan data dummy untuk uji coba. Backup JSON secara berkala; menghapus data browser akan menghilangkan data lokal.
+Logo ini adalah konsep identitas TIFA, bukan logo resmi PLN; jangan mengganti logo resmi PLN tanpa persetujuan.
 
-Progres fisik dan nilai terbayar mengikuti data yang diinput/diimpor. Grafik mingguan dan validasi formula Excel yang rusak (`#REF!`) tidak direkonstruksi otomatis. Untuk penggunaan operasional, perlu backend, database persisten, kontrol akses, dan validasi data.
+
+## Modul baru: Progres Fisik & Kurva S per pekerjaan
+- Pilih pekerjaan dari data AI/AO yang sudah dibuat atau diimpor.
+- Klik **+ Item pekerjaan** untuk mengisi uraian RAB, satuan, volume rencana, volume realisasi dan harga satuan.
+- Bobot item dihitung dari nilai item dibanding total RAB; progres fisik berbobot dari realisasi volume.
+- Klik **+ Periode** untuk mencatat rencana dan realisasi kumulatif (0–100%) setiap bulan.
+- Grafik Kurva S, deviasi dan tabel historis ditampilkan khusus untuk pekerjaan yang dipilih.
+- Backup JSON sekarang menyertakan data item RAB dan periode Kurva S.
+- Data tetap di browser lokal, bukan server. Jangan masukkan data sensitif operasional.
+
+**Catatan:** Progres fisik berbobot dan realisasi Kurva S adalah dua indikator berbeda: Kurva S diinput per periode secara manual, tidak otomatis tersinkron dengan perhitungan volume RAB. Periode yang dimasukkan tidak boleh duplikat per pekerjaan.
